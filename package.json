@@ -16,6 +16,10 @@
       {
         "command": "markdown-blockquote.applyBlockquote",
         "title": "markdown-blockquote: Apply Blockquote"
+      },
+      {
+        "command": "markdown-blockquote.deleteBlockquote",
+        "title": "markdown-blockquote: Delete Blockquote"
       }
     ]
   },
@@ -37,5 +41,6 @@
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.4.0",
     "typescript": "^5.4.5"
-  }
+  },
+  "publisher": "thr3a-markdown-blockquote"
 }

@@ -28,9 +28,37 @@ export function activate(context: vscode.ExtensionContext) {
         selections.forEach((selection) => {
           const text = document.getText(selection);
           const lines = text.split('\n');
-          const blockquotedLines = lines.map((line) => `> ${line.trim()}  `);
+          const blockquotedLines = lines.map((line) => {
+            if (line.trim() === '') {
+              return line;
+            }
+            return `> ${line.trim()}  `;
+          });
           const blockquotedText = blockquotedLines.join('\n');
           editBuilder.replace(selection, blockquotedText);
+        });
+      });
+    }
+  });
+
+  const deleteBlockquoteDisposable = vscode.commands.registerCommand('markdown-blockquote.deleteBlockquote', () => {
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+      const document = editor.document;
+      const selections = editor.selections;
+
+      editor.edit((editBuilder) => {
+        selections.forEach((selection) => {
+          const text = document.getText(selection);
+          const lines = text.split('\n');
+          const unblockquotedLines = lines.map((line) => {
+            if (line.trim().startsWith('> ')) {
+              return line.trim().slice(2);
+            }
+            return line;
+          });
+          const unblockquotedText = unblockquotedLines.join('\n');
+          editBuilder.replace(selection, unblockquotedText);
         });
       });
     }
