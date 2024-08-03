@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "markdown-blockquote.helloWorld",
-        "title": "Hello World"
+        "command": "markdown-blockquote.applyBlockquote",
+        "title": "markdown-blockquote: Apply Blockquote"
       }
     ]
   },

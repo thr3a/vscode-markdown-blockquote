@@ -16,7 +16,25 @@ export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand('markdown-blockquote.helloWorld', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from markdown-blockquote!');
+		vscode.window.showInformationMessage('やっほー!!!!');
+	});
+
+	const applyBlockquoteDisposable = vscode.commands.registerCommand('markdown-blockquote.applyBlockquote', () => {
+		const editor = vscode.window.activeTextEditor;
+		if (editor) {
+				const document = editor.document;
+				const selections = editor.selections;
+
+				editor.edit(editBuilder => {
+						selections.forEach(selection => {
+								const text = document.getText(selection);
+								const lines = text.split('\n');
+								const blockquotedLines = lines.map(line => `> ${line.trim()}  `);
+								const blockquotedText = blockquotedLines.join('\n');
+								editBuilder.replace(selection, blockquotedText);
+						});
+				});
+			}
 	});
 
 	context.subscriptions.push(disposable);
